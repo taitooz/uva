@@ -16,11 +16,19 @@ var calculator = function(pocketMoney) {
 };
 
 var callBank = function(url) {
-    var xhttp = new XMLHttpRequest();
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", url, true); // true for asynchronous
+    xmlHttp.send(null);
+
+    /**var xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, false);
     xhttp.setRequestHeader("Content-type", "text/html; charset=utf-8");
-    xhttp.send();
-    var response = JSON.parse(xhttp.responseText);
+    xhttp.send(null);**/
+    //var response = JSON.parse(xhttp.responseText);
     console.log(response);
     return response;
 };
@@ -33,5 +41,5 @@ var result = calculator(pocketMoney);
 url = url.replace("#propCost#", (result.propertyCost * usValue));
 url = url.replace("#loan#", (result.loan * usValue));
 console.log(url);
-let response = callBank(url);
+var response = callBank(url);
 
