@@ -35,7 +35,7 @@ var callBank = function(url) {
 
 
 var usValue = 17.23;
-var pocketMoney = 23000;
+var pocketMoney = 0;
 var result = calculator(pocketMoney);
 
 url = url.replace("#propCost#", (result.propertyCost * usValue));
